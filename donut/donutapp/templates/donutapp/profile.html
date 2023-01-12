@@ -1,0 +1,314 @@
+{% extends 'donutapp/header.html' %}
+{% load static %}
+{% block head %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{% static 'css/style.min.css' %}">
+    <link rel="shortcut icon" href="{% static 'img/icon.png' %}" type="image/x-icon">
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Профиль </title>
+</head>
+{% endblock %}
+{% block name %}
+<div class="wrapper">
+    <section class="content">
+        <div class="blur-search" id="overlay-blur">
+            <div class="profile_info">
+                <div class="logo">
+                    <img src="{% static 'img/1.png' %}" alt="" width="150px">
+                </div>
+                <div class="file-upload ">
+                    <form action="" enctype="multipart/form-data" method="post">
+                        {% csrf_token %}
+                        <div class="example-1">
+                            <div class="form-group">
+                                <label class="label">
+                                    <svg class="svg" style="width:100px;height:100px" viewBox="0 0 24 24">
+                                        <path fill="currentColor"
+                                              d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z"/>
+                                    </svg>
+                                    <input type="file" name="" id="">
+                                </label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="profile_container">
+                    <div>
+                        <p class="username">
+                            Santikas
+                            <!--                            {% if count_follow > 10 %}-->
+                            <!--                            <img src="{% static 'img/gaochka.png' %}" alt="" width="30px" style="margin-top: -5px">-->
+                            <!--                            {% endif %}-->
+                        </p>
+                    </div>
+                </div>
+                <div>
+                    <nav class="three">
+                        <ul class="topmenu">
+                            <li><a class="as as_li" href="#">. . .<i class=""></i></a>
+                                <ul class="submenu">
+                                    <li><a class="as2 as4" href="#">QR CODE</a></li>
+                                    <li><a class="as2" href="#">Статистика</a></li>
+                                    <li><a class="as2 as3" href="#">Выйти</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="post">
+                    <p class="header_title">5 posts</p>
+                    <p class="header_title follower">5 follower</p>
+                    <p class="header_title follow2">5 follow</p>
+                </div>
+            </div>
+            <div class="post_container">
+                <div class="post_gallery">
+                    <div class="user_post content2">
+                        <div class="content-overlay"></div>
+                        <img class="post_img content-image" src="{% static 'img/1.png' %}" height="230px"
+                             width="300px">
+                        <div class="content-details fadeIn-bottom">
+                            <h3>Описание</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget
+                                dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,
+                                nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium
+                                quis,
+                                sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec,
+                                vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae,
+                                justo.
+                                Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus
+                                elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula,
+                                porttitor
+                                eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra
+                                quis,
+                                feugiat a, tellus. Phasellus viverra nulla ut metus letius laoreet. Quisque rutrum.
+                                Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies
+                                nisi.
+                                Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem
+                                quam
+                                semper libero, sit amet adipiscing sem neque sed ipsum. N</p>
+                            <button class="more_btn">Подробнее</button>
+                        </div>
+                        <div class="overlay3" id="myOverlay">
+                            <div class="popup2">
+                                <div class="photo-post">
+                                    <img src="{% static 'img/1.png' %}" alt="" width="100%" height="100%"
+                                         style=" object-fit: cover;	">
+                                </div>
+                                <div>
+                                    <nav class="three2">
+                                        <ul class="topmenu">
+                                            <li><a class="as " href="#">. . .<i class=""></i></a>
+                                                <ul class="submenu2">
+                                                    <form action="" method="post">
+                                                        {% csrf_token %}
+                                                        <input class="id-post2 edit2" id="s{{posts.id}}" name="id"
+                                                               type="button"
+                                                               value="{{ posts.id }}">
+                                                        <li><a class="as2" href="">Редактировать</a></li>
+                                                    </form>
+                                                    <li><a class="as2 as3 delete-btn" id="opens{{posts.id}}"
+                                                           href="#">Удалить</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                                <a href="#">
+                                    <div class="header">
+                                        <div class="avatar3">
+                                            <img class="main-logo" src="{% static 'img/1.png' %}" alt=""
+                                                 width="70px">
+                                        </div>
+                                        <h1 class="title-post">SANTIKAS</h1>
+                                    </div>
+                                </a>
+                                <div class="description" id="description{{posts.id}}">
+                                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
+                                        ligula
+                                        eget
+                                        dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient
+                                        montes,
+                                        nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu,
+                                        pretium quis,
+                                        sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel,
+                                        aliquet
+                                        nec,
+                                        vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis
+                                        vitae,
+                                        justo.
+                                        Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus.
+                                        Vivamus
+                                        elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula,
+                                        porttitor
+                                        eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in,
+                                        viverra
+                                        quis,
+                                        feugiat a, tellus. Phasellus viverra nulla ut metus letius laoreet. Quisque
+                                        rutrum.
+                                        Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper
+                                        ultricies nisi.
+                                        Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum
+                                        rhoncus,
+                                        sem quam
+                                        semper libero, sit amet adipiscing sem neque sed ipsum. N</p>
+                                </div>
+                                <form action="#" method="post" class="like-form form-like"
+                                      id="g">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="post_id" value="{{posts.id}}">
+                                    <button class="ui button positive like-btn{{posts.id}}" id="btnlike{{posts.id}}"
+                                            type="submit"><p
+                                            class="like-img"
+                                            id="like-img{{posts.id}}">
+                                        ❤ 5</p></button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="overlay5" id="myOverlayopens{{posts.id}}">
+                            <div class="popup5">
+                                <h2 class="submit-delete">Вы действительно хотите</br>удалить этот пост?</h2>
+                                <form action="#" method="post">
+                                    {% csrf_token %}
+                                    <input class="id-post" name="id" type="submit" value="{{ posts.id }}">
+                                    <div class="yes">ДА</div>
+                                </form>
+                                <div class="close-popup5">НЕТ</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="overlay3" id="myOverlay2">
+                        <div class="popup3">
+                            <h2 class="titel">Ваши подписчики</h2>
+                            <div>
+                                <img src="{% static 'img/no-followers.gif' %}" alt="" width="200px"
+                                     style="border-radius: 30px">
+                                <h2 class="no-followers">No followers</h2>
+                                <!--                                <div class="followers-scroll">-->
+                                <!--                     -->
+                                <!--                                    <a href="#">-->
+                                <!--                                        <div class="follow-div">-->
+                                <!--                                            <div class="img">-->
+                                <!--                                                <img src="{% static 'img/1.png' %}" alt="" width="60px">-->
+                                <!--                                            </div>-->
+                                <!--                                            <p class="nic">Santikas</p>-->
+                                <!--                                        </div>-->
+                                <!--                                    </a>-->
+
+
+                                <!--                                </div>-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="overlay4" id="myOverlay3">
+                        <div class="popup3">
+                            <h2 class="titel">Подписки</h2>
+                            <div>
+                                <img src="{% static 'img/no-followers.gif' %}" alt="" width="200px"
+                                     style="border-radius: 30px">
+                                <h2 class="no-followers">No follow</h2>
+                                <!--                                <div class="followers-scroll">-->
+                                <!--                     -->
+                                <!--                                    <a href="#">-->
+                                <!--                                        <div class="follow-div">-->
+                                <!--                                            <div class="img">-->
+                                <!--                                                <img src="{% static 'img/1.png' %}" alt="" width="60px">-->
+                                <!--                                            </div>-->
+                                <!--                                            <p class="nic">Santikas</p>-->
+                                <!--                                        </div>-->
+                                <!--                                    </a>-->
+                                <!--                                </div>-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="overlay6" id="myOverlay6">
+                        <div class="popup6">
+                            <h2 class="titel">Поделитесь своим профилем</h2>
+                            <div>
+                                <img src="{% static 'img/qr.png' %}" alt="" class="qr">
+                                <div id="my-share" class="ya-share2" data-curtain data-size="l" data-shape="round"
+                                     data-color-scheme="whiteblack" data-services="vkontakte,telegram,twitter"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+</div>
+</section>
+</div>
+
+
+<script src="http://code.jquery.com/jquery-2.0.2.min.js"></script>
+<script src="https://yastatic.net/share2/share.js"></script>
+<script>
+    $(document).on('click', '.more_btn', function (e) {
+        // let id = e.target.id;  $('#myOverlay'+id).fadeIn();
+        $('#myOverlay').fadeIn();
+    });
+    $('.close-popup2').click(function () {
+        $('.overlay3').fadeOut();
+    });
+    $(document).mouseup(function (e) {
+        let popup = $('.popup2');
+        if (e.target != popup[0] && popup.has(e.target).length === 0) {
+            $('.overlay3').fadeOut();
+        }
+    });
+    $(document).on('click', '.delete-btn', function (e) {
+        let id = e.target.id;
+        $('#myOverlay' + id).fadeIn();
+    });
+    $('.close-popup5').click(function () {
+        $('.overlay5').fadeOut();
+    });
+    $(document).on('click', '.follower', function (e) {
+        let id = e.target.id;
+        $('#myOverlay2').fadeIn();
+    });
+
+    $(document).mouseup(function (e) {
+        let popup = $('.popup3');
+        if (e.target != popup[0] && popup.has(e.target).length === 0) {
+            $('.overlay3').fadeOut();
+        }
+    });
+    $(document).on('click', '.follow2', function (e) {
+        let id = e.target.id;
+        $('#myOverlay3').fadeIn();
+    });
+
+    $(document).mouseup(function (e) {
+        let popup = $('.popup4');
+        if (e.target != popup[0] && popup.has(e.target).length === 0) {
+            $('.overlay4').fadeOut();
+        }
+    });
+    $(document).on('click', '.as4', function (e) {
+        let id = e.target.id;
+        $('#myOverlay6').fadeIn();
+    });
+    $(document).mouseup(function (e) {
+        let popup = $('.popup6');
+        if (e.target != popup[0] && popup.has(e.target).length === 0) {
+            $('.overlay6').fadeOut();
+        }
+    });
+    Ya.share2('my-share', {
+        content: {
+            url: 'http://127.0.0.1:8000{{ cUser.qr_code.url }}',
+            title: 'Мой профиль в DONUT',
+            description: 'Подпишись!',
+            image: 'http://127.0.0.1:8000{{ cUser.qr_code.url }}'
+        }
+    });
+
+</script>
+{% endblock %}

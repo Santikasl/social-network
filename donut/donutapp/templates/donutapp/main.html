@@ -1,0 +1,565 @@
+{% extends 'donutapp/header.html' %}
+{% load static %}
+{% block head %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{% static 'css/style.min.css' %}">
+    <link rel="shortcut icon" href="{% static 'img/icon.png' %}" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.2/fullpage.min.css"
+          integrity="sha512-4rPgyv5iG0PZw8E+oRdfN/Gq+yilzt9rQ8Yci2jJ15rAyBmF0HBE4wFjBkoB72cxBeg63uobaj1UcNt/scV93w=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.2/fullpage.min.js"
+            integrity="sha512-gSf3NCgs6wWEdztl1e6vUqtRP884ONnCNzCpomdoQ0xXsk06lrxJsR7jX5yM/qAGkPGsps+4bLV5IEjhOZX+gg=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <title>Главаня</title>
+</head>
+{% block scripts %}
+<script src="{% static 'js/search.js' %}" defer></script>
+{% endblock %}
+{% endblock %}
+{% block name %}
+<script>
+    window.onload = function () {
+        document.body.classList.add('loaded_hiding');
+        window.setTimeout(function () {
+            document.body.classList.add('loaded');
+            document.body.classList.remove('loaded_hiding');
+        }, 500);
+    }
+</script>
+<!-- Прелоадер -->
+<div class="preloader">
+    <div class="preloader__row">
+        <div class="preloader__item"></div>
+        <div class="preloader__item"></div>
+    </div>
+</div>
+<div class="wrapper">
+    <div id="fullpage">
+        <div class="section s1">
+            <a href="#1"></a>
+            <section class="content">
+                <section class="content__gallery gallery">
+                    <div class="gallery__items">
+                        <div class="gallery__item gallery__item_big">
+                            <div class="round"></div>
+                            <img class="welcome" src="{% static 'img/welcome.png' %}" alt="">
+                            <img class="welcome2" src="{% static 'img/back.png' %}" alt="" width="300px">
+                            <a href="#">
+                                <div class="avatar">
+                                    <img class="main-logo" src="{% static 'img/1.png' %}" alt="">
+                                </div>
+                            </a>
+
+                        </div>
+                        <div class="gallery__item gallery__item_big">
+
+                            <div class="facts_container">
+                                <div class="random_container">
+                                    <h1 class="random">Random facts</h1>
+                                </div>
+                                <div class="facts_text">
+                                    <p class="facts_p">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias
+                                        delectus fuga fugiat in praesentium quibusdam. A assumenda hic ipsa laborum
+                                        libero optio. Adipisci illum iste labore pariatur ut, voluptas voluptates.</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+            </section>
+        </div>
+        <div class="section s2">
+            <a href="#2"></a>
+            <div class="section2">
+
+                <div class="photo_content">
+                    <div class="subscribe_container">
+                        <h1 class="subscribe_title">Ваши подписки</h1>
+                    </div>
+                    <div class="photo_gallery">
+                        <div class="photo content2">
+                            <div class="content-overlay"></div>
+                            <img class="photo_img content-image" src="{% static 'img/1.png' %}" height="230px"
+                                 width="300px">
+                            <div class="user_logo">
+                                <img class="user_logo_img" src="{% static 'img/1.png' %}">
+                            </div>
+                            <div class="desc">Santikas</div>
+                            <div class="content-details fadeIn-bottom">
+                                <h3>Santikas</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget
+                                    dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,
+                                    nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium
+                                    quis,
+                                    sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec,
+                                    vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae,
+                                    justo.
+                                    Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus
+                                    elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula,
+                                    porttitor
+                                    eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra
+                                    quis,
+                                    feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum.
+                                    Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies
+                                    nisi.
+                                    Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem
+                                    quam
+                                    semper libero, sit amet adipiscing sem neque sed ipsum. N</p>
+                                <button class="more_btn">Подробнее</button>
+                            </div>
+                            <div class="overlay2" id="myOverlay">
+                                <div class="popup2">
+                                    <div class="photo-post">
+                                        <img src="{% static 'img/1.png' %}" alt="" width="100%" height="100%"
+                                             style=" object-fit: cover;	">
+                                    </div>
+                                    <a href="#">
+                                        <div class="header">
+                                            <div class="avatar3">
+                                                <img class="main-logo" src="{% static 'img/1.png' %}" alt=""
+                                                     width="70px">
+                                            </div>
+                                            <h1 class="title-post">SANTIKAS</h1>
+                                        </div>
+                                    </a>
+                                    <div class="description" id="description{{posts.id}}">
+                                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
+                                            ligula
+                                            eget
+                                            dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient
+                                            montes,
+                                            nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu,
+                                            pretium quis,
+                                            sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel,
+                                            aliquet
+                                            nec,
+                                            vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis
+                                            vitae,
+                                            justo.
+                                            Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus.
+                                            Vivamus
+                                            elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula,
+                                            porttitor
+                                            eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in,
+                                            viverra
+                                            quis,
+                                            feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque
+                                            rutrum.
+                                            Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper
+                                            ultricies nisi.
+                                            Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum
+                                            rhoncus,
+                                            sem quam
+                                            semper libero, sit amet adipiscing sem neque sed ipsum. N</p>
+                                    </div>
+                                    <form action="#" method="post" class="like-form form-like"
+                                          id="g">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="post_id" value="{{posts.id}}">
+                                        <button class="ui button positive like-btn{{posts.id}}" id="btnlike{{posts.id}}"
+                                                type="submit"><p
+                                                class="like-img"
+                                                id="like-img{{posts.id}}">
+                                            ❤ 5</p></button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="photo content2">
+                            <div class="content-overlay"></div>
+                            <img class="photo_img content-image" src="{% static 'img/1.png' %}" height="230px"
+                                 width="300px">
+                            <div class="user_logo">
+                                <img class="user_logo_img" src="{% static 'img/1.png' %}">
+                            </div>
+                            <div class="desc">Santikas</div>
+                            <div class="content-details fadeIn-bottom">
+                                <h3>Santikas</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget
+                                    dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,
+                                    nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium
+                                    quis,
+                                    sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec,
+                                    vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae,
+                                    justo.
+                                    Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus
+                                    elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula,
+                                    porttitor
+                                    eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra
+                                    quis,
+                                    feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum.
+                                    Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies
+                                    nisi.
+                                    Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem
+                                    quam
+                                    semper libero, sit amet adipiscing sem neque sed ipsum. N</p>
+                                <button class="more_btn">Подробнее</button>
+                            </div>
+                        </div>
+                        <div class="photo content2">
+                            <div class="content-overlay"></div>
+                            <img class="photo_img content-image" src="{% static 'img/1.png' %}" height="230px"
+                                 width="300px">
+                            <div class="user_logo">
+                                <img class="user_logo_img" src="{% static 'img/1.png' %}">
+                            </div>
+                            <div class="desc">Santikas</div>
+                            <div class="content-details fadeIn-bottom">
+                                <h3>Santikas</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget
+                                    dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,
+                                    nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium
+                                    quis,
+                                    sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec,
+                                    vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae,
+                                    justo.
+                                    Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus
+                                    elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula,
+                                    porttitor
+                                    eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra
+                                    quis,
+                                    feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum.
+                                    Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies
+                                    nisi.
+                                    Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem
+                                    quam
+                                    semper libero, sit amet adipiscing sem neque sed ipsum. N</p>
+                                <button class="more_btn">Подробнее</button>
+                            </div>
+                        </div>
+                        <div class="photo content2">
+                            <div class="content-overlay"></div>
+                            <img class="photo_img content-image" src="{% static 'img/1.png' %}" height="230px"
+                                 width="300px">
+                            <div class="user_logo">
+                                <img class="user_logo_img" src="{% static 'img/1.png' %}">
+                            </div>
+                            <div class="desc">Santikas</div>
+                            <div class="content-details fadeIn-bottom">
+                                <h3>Santikas</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget
+                                    dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,
+                                    nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium
+                                    quis,
+                                    sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec,
+                                    vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae,
+                                    justo.
+                                    Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus
+                                    elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula,
+                                    porttitor
+                                    eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra
+                                    quis,
+                                    feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum.
+                                    Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies
+                                    nisi.
+                                    Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem
+                                    quam
+                                    semper libero, sit amet adipiscing sem neque sed ipsum. N</p>
+                                <button class="more_btn">Подробнее</button>
+                            </div>
+                        </div>
+                        <div class="photo content2">
+                            <div class="content-overlay"></div>
+                            <img class="photo_img content-image" src="{% static 'img/1.png' %}" height="230px"
+                                 width="300px">
+                            <div class="user_logo">
+                                <img class="user_logo_img" src="{% static 'img/1.png' %}">
+                            </div>
+                            <div class="desc">Santikas</div>
+                            <div class="content-details fadeIn-bottom">
+                                <h3>Santikas</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget
+                                    dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,
+                                    nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium
+                                    quis,
+                                    sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec,
+                                    vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae,
+                                    justo.
+                                    Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus
+                                    elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula,
+                                    porttitor
+                                    eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra
+                                    quis,
+                                    feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum.
+                                    Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies
+                                    nisi.
+                                    Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem
+                                    quam
+                                    semper libero, sit amet adipiscing sem neque sed ipsum. N</p>
+                                <button class="more_btn">Подробнее</button>
+                            </div>
+                        </div>
+                        <div class="photo content2">
+                            <div class="content-overlay"></div>
+                            <img class="photo_img content-image" src="{% static 'img/1.png' %}" height="230px"
+                                 width="300px">
+                            <div class="user_logo">
+                                <img class="user_logo_img" src="{% static 'img/1.png' %}">
+                            </div>
+                            <div class="desc">Santikas</div>
+                            <div class="content-details fadeIn-bottom">
+                                <h3>Santikas</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget
+                                    dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,
+                                    nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium
+                                    quis,
+                                    sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec,
+                                    vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae,
+                                    justo.
+                                    Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus
+                                    elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula,
+                                    porttitor
+                                    eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra
+                                    quis,
+                                    feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum.
+                                    Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies
+                                    nisi.
+                                    Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem
+                                    quam
+                                    semper libero, sit amet adipiscing sem neque sed ipsum. N</p>
+                                <button class="more_btn">Подробнее</button>
+                            </div>
+                        </div>
+                        <div class="photo content2">
+                            <div class="content-overlay"></div>
+                            <img class="photo_img content-image" src="{% static 'img/1.png' %}" height="230px"
+                                 width="300px">
+                            <div class="user_logo">
+                                <img class="user_logo_img" src="{% static 'img/1.png' %}">
+                            </div>
+                            <div class="desc">Santikas</div>
+                            <div class="content-details fadeIn-bottom">
+                                <h3>Santikas</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget
+                                    dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,
+                                    nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium
+                                    quis,
+                                    sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec,
+                                    vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae,
+                                    justo.
+                                    Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus
+                                    elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula,
+                                    porttitor
+                                    eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra
+                                    quis,
+                                    feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum.
+                                    Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies
+                                    nisi.
+                                    Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem
+                                    quam
+                                    semper libero, sit amet adipiscing sem neque sed ipsum. N</p>
+                                <button class="more_btn">Подробнее</button>
+                            </div>
+                        </div>
+                        <div class="photo content2">
+                            <div class="content-overlay"></div>
+                            <img class="photo_img content-image" src="{% static 'img/1.png' %}" height="230px"
+                                 width="300px">
+                            <div class="user_logo">
+                                <img class="user_logo_img" src="{% static 'img/1.png' %}">
+                            </div>
+                            <div class="desc">Santikas</div>
+                            <div class="content-details fadeIn-bottom">
+                                <h3>Santikas</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget
+                                    dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,
+                                    nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium
+                                    quis,
+                                    sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec,
+                                    vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae,
+                                    justo.
+                                    Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus
+                                    elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula,
+                                    porttitor
+                                    eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra
+                                    quis,
+                                    feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum.
+                                    Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies
+                                    nisi.
+                                    Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem
+                                    quam
+                                    semper libero, sit amet adipiscing sem neque sed ipsum. N</p>
+                                <button class="more_btn">Подробнее</button>
+                            </div>
+                        </div>
+                        <div class="photo content2">
+                            <div class="content-overlay"></div>
+                            <img class="photo_img content-image" src="{% static 'img/1.png' %}" height="230px"
+                                 width="300px">
+                            <div class="user_logo">
+                                <img class="user_logo_img" src="{% static 'img/1.png' %}">
+                            </div>
+                            <div class="desc">Santikas</div>
+                            <div class="content-details fadeIn-bottom">
+                                <h3>Santikas</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget
+                                    dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,
+                                    nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium
+                                    quis,
+                                    sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec,
+                                    vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae,
+                                    justo.
+                                    Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus
+                                    elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula,
+                                    porttitor
+                                    eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra
+                                    quis,
+                                    feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum.
+                                    Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies
+                                    nisi.
+                                    Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem
+                                    quam
+                                    semper libero, sit amet adipiscing sem neque sed ipsum. N</p>
+                                <button class="more_btn">Подробнее</button>
+                            </div>
+                        </div>
+                        <div class="photo content2">
+                            <div class="content-overlay"></div>
+                            <img class="photo_img content-image" src="{% static 'img/1.png' %}" height="230px"
+                                 width="300px">
+                            <div class="user_logo">
+                                <img class="user_logo_img" src="{% static 'img/1.png' %}">
+                            </div>
+                            <div class="desc">Santikas</div>
+                            <div class="content-details fadeIn-bottom">
+                                <h3>Santikas</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget
+                                    dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,
+                                    nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium
+                                    quis,
+                                    sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec,
+                                    vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae,
+                                    justo.
+                                    Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus
+                                    elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula,
+                                    porttitor
+                                    eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra
+                                    quis,
+                                    feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum.
+                                    Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies
+                                    nisi.
+                                    Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem
+                                    quam
+                                    semper libero, sit amet adipiscing sem neque sed ipsum. N</p>
+                                <button class="more_btn">Подробнее</button>
+                            </div>
+                        </div>
+                        <div class="photo content2">
+                            <div class="content-overlay"></div>
+                            <img class="photo_img content-image" src="{% static 'img/1.png' %}" height="230px"
+                                 width="300px">
+                            <div class="user_logo">
+                                <img class="user_logo_img" src="{% static 'img/1.png' %}">
+                            </div>
+                            <div class="desc">Santikas</div>
+                            <div class="content-details fadeIn-bottom">
+                                <h3>Santikas</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget
+                                    dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,
+                                    nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium
+                                    quis,
+                                    sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec,
+                                    vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae,
+                                    justo.
+                                    Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus
+                                    elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula,
+                                    porttitor
+                                    eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra
+                                    quis,
+                                    feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum.
+                                    Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies
+                                    nisi.
+                                    Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem
+                                    quam
+                                    semper libero, sit amet adipiscing sem neque sed ipsum. N</p>
+                                <button class="more_btn">Подробнее</button>
+                            </div>
+                        </div>
+                        <div class="photo content2">
+                            <div class="content-overlay"></div>
+                            <img class="photo_img content-image" src="{% static 'img/1.png' %}" height="230px"
+                                 width="300px">
+                            <div class="user_logo">
+                                <img class="user_logo_img" src="{% static 'img/1.png' %}">
+                            </div>
+                            <div class="desc">Santikas</div>
+                            <div class="content-details fadeIn-bottom">
+                                <h3>Santikas</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget
+                                    dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,
+                                    nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium
+                                    quis,
+                                    sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec,
+                                    vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae,
+                                    justo.
+                                    Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus
+                                    elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula,
+                                    porttitor
+                                    eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra
+                                    quis,
+                                    feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum.
+                                    Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies
+                                    nisi.
+                                    Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem
+                                    quam
+                                    semper libero, sit amet adipiscing sem neque sed ipsum. N</p>
+                                <button class="more_btn">Подробнее</button>
+                            </div>
+
+
+                        </div>
+                    </div>
+                                        <div class="old_photo">
+                                            <h1>Вы посмотрели все обновления </br>
+                                                <a style="color: #4ac1f7; font-size: 30px" href="#">Смотреть предыдущие</a> | <a
+                                                        style="color: #CC3434; font-size: 30px" href="#">Рекомендации</a>
+                                            </h1>
+                                        </div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+<script>
+    new fullpage('#fullpage', {
+        // здесь параметры
+        autoScrolling: true,
+        anchors: ['1', '2', '3'],
+        scrollHorizontally: true,
+        showActiveTooltip: true,
+        controlArrows: false,
+        slidesNavigation: true,
+        normalScrollElements: '.s2, .photo_gallery'
+    });
+</script>
+<script src="http://code.jquery.com/jquery-2.0.2.min.js"></script>
+<script>
+    $(document).on('click', '.more_btn', function (e) {
+        // let id = e.target.id;  $('#myOverlay'+id).fadeIn();
+        $('#myOverlay').fadeIn();
+    });
+    // Закрытие окна на крестикe
+    $('.close-popup2').click(function () {
+        $('.overlay2').fadeOut();
+    });
+    // Закрытие окна на поле
+    $(document).mouseup(function (e) {
+        var popup = $('.popup2');
+        if (e.target != popup[0] && popup.has(e.target).length === 0) {
+            $('.overlay2').fadeOut();
+        }
+    });
+</script>
+
+{% endblock %}

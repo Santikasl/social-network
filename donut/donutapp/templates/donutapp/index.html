@@ -1,0 +1,92 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{% static 'css/style.min.css' %}">
+    <link rel="shortcut icon" href="{% static 'img/icon.png' %}" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.2/fullpage.min.css"
+          integrity="sha512-4rPgyv5iG0PZw8E+oRdfN/Gq+yilzt9rQ8Yci2jJ15rAyBmF0HBE4wFjBkoB72cxBeg63uobaj1UcNt/scV93w=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.2/fullpage.min.js"
+            integrity="sha512-gSf3NCgs6wWEdztl1e6vUqtRP884ONnCNzCpomdoQ0xXsk06lrxJsR7jX5yM/qAGkPGsps+4bLV5IEjhOZX+gg=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <title>Donut</title>
+</head>
+<body>
+<div class="wrapper">
+    <div id="fullpage">
+
+        <div class="section s1">
+
+            <section class="content">
+                <a href="#1"></a>
+                <div class="logo_container">
+                    <img src="{% static 'img/logo.png' %}" alt="" width="700px">
+                </div>
+                <div class="text-container">
+                    <p>DONUT - это социальная сеть нового поколения.</br> Находи друзей, делись новыми фотографиями,
+                        оставляй лайки и комментарии </br>Всё это и не только в социальной сети DONUT</p>
+                </div>
+            </section>
+
+        </div>
+
+        <div class="section s2">
+            <a href="#2"></a>
+            <section class="content">
+                <section class="content__gallery gallery">
+                    <div class="gallery__items">
+                        <div class="gallery__item gallery__item_big">
+                            <img src="{% static 'img/crystal4.png' %}" alt="">
+                        </div>
+                        <div class="gallery__item gallery__item_big">
+                            <img src="{% static 'img/text2.png' %}" alt="">
+                        </div>
+                    </div>
+                </section>
+            </section>
+        </div>
+
+        <div class="section s3">
+            <section class="content">
+                <section class="content__gallery gallery">
+                    <div class="gallery__items">
+                        <div class="gallery__item gallery__item_big">
+                            <form id="text2" class="registr" method="post" action="">
+
+                            </form>
+                        </div>
+                        <div class="gallery__item gallery__item_big">
+                            <img class="start" src="{% static 'img/start.png' %}" alt="">
+                        </div>
+                    </div>
+                </section>
+            </section>
+            <a href="#3"></a>
+        </div>
+
+    </div>
+</div>
+<script>
+    new fullpage('#fullpage', {
+        // здесь параметры
+        autoScrolling: true,
+        navigation: true,
+        anchors: ['1', '2', '3'],
+        scrollHorizontally: true,
+        continuousVertical: true,
+        navigationTooltips: ['DONUT', 'INFO', 'START'],
+        showActiveTooltip: true,
+    });
+
+</script>
+
+</body>
+</html>
+
+
