@@ -50,9 +50,11 @@
                             <div class="round"></div>
                             <img class="welcome" src="{% static 'img/welcome.png' %}" alt="">
                             <img class="welcome2" src="{% static 'img/back.png' %}" alt="" width="300px">
-                            <a href="#">
+                            <a href="{% url 'profile' %}">
                                 <div class="avatar">
-                                    <img class="main-logo" src="{% static 'img/1.png' %}" alt="">
+
+                                    <img class="main-logo" src="{{ profile.img.url }}" alt="">
+
                                 </div>
                             </a>
 
@@ -64,9 +66,7 @@
                                     <h1 class="random">Random facts</h1>
                                 </div>
                                 <div class="facts_text">
-                                    <p class="facts_p">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias
-                                        delectus fuga fugiat in praesentium quibusdam. A assumenda hic ipsa laborum
-                                        libero optio. Adipisci illum iste labore pariatur ut, voluptas voluptates.</p>
+                                    <p class="facts_p">{{random_facts.description}}</p>
                                 </div>
                             </div>
 

@@ -1,4 +1,5 @@
 {% load static %}
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -57,8 +58,38 @@
                 <section class="content__gallery gallery">
                     <div class="gallery__items">
                         <div class="gallery__item gallery__item_big">
-                            <form id="text2" class="registr" method="post" action="">
+                            <form id="text2" class="auth" method="post" action="{% url 'signin' %}">
+                                {% csrf_token %}
+                                <h1 class="auth_titel">Авторизация</h1>
+                                <div> {{ form.name}}</div>
 
+                                <div> {{ form.password}}</div>
+                                 {% for message in messages %}
+                                <span class="error_msg2">{{ message }}</span>
+                                {% endfor %}
+                                <div><a href="#" class="signup" id="signup">Ещё нет аккаунта...</a></div>
+                                <button class="btnS" type="submit">START</button>
+                            </form>
+
+                            <form id="text" class="registr" method="post" action="{% url 'signup' %}">
+                                <h1 class="registr_titel">Регистрация</h1>
+                                {% csrf_token %}
+                                {{ register_form.username}}
+                                <span class="msg" id="msg_name">Ник должен быть больше 7 символов</span>
+                                {{ register_form.email}}
+                                {{ register_form.password1 }}
+                                <span class="msg" id="msg_password">В пароле должны быть цифры и символы</span>
+                                {{ register_form.password2 }}
+                                <span class="msg" id="msg">Проверьте правильность пароля</span>
+
+
+                                <select name="male" class="male-select">
+                                    <option>MALE</option>
+                                    <option>FEMALE</option>
+                                </select>
+
+                                <div><a href="#" class="signup" id="signin">Уже есть аккаунт...</a></div>
+                                <button class="btnS" type="submit">START</button>
                             </form>
                         </div>
                         <div class="gallery__item gallery__item_big">
@@ -72,7 +103,23 @@
 
     </div>
 </div>
+
+<script src="{% static 'js/validators.js' %}"></script>
 <script>
+
+    let btn = document.getElementById("signup")
+    let btn2 = document.getElementById("signin")
+    let auth = document.getElementById("text2")
+    let registr = document.getElementById("text")
+    registr.style.display = "none";
+    btn.onclick = function () {
+        auth.style.display = "none";
+        registr.style.display = "block";
+    };
+    btn2.onclick = function () {
+        registr.style.display = "none";
+        auth.style.display = "block";
+    };
     new fullpage('#fullpage', {
         // здесь параметры
         autoScrolling: true,

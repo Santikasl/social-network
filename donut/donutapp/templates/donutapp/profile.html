@@ -19,7 +19,7 @@
         <div class="blur-search" id="overlay-blur">
             <div class="profile_info">
                 <div class="logo">
-                    <img src="{% static 'img/1.png' %}" alt="" width="150px">
+                    <img src="{{ profile.img.url }}" alt="" width="150px">
                 </div>
                 <div class="file-upload ">
                     <form action="" enctype="multipart/form-data" method="post">
@@ -40,10 +40,7 @@
                 <div class="profile_container">
                     <div>
                         <p class="username">
-                            Santikas
-                            <!--                            {% if count_follow > 10 %}-->
-                            <!--                            <img src="{% static 'img/gaochka.png' %}" alt="" width="30px" style="margin-top: -5px">-->
-                            <!--                            {% endif %}-->
+                           {{ profile.name }}
                         </p>
                     </div>
                 </div>
@@ -54,7 +51,7 @@
                                 <ul class="submenu">
                                     <li><a class="as2 as4" href="#">QR CODE</a></li>
                                     <li><a class="as2" href="#">Статистика</a></li>
-                                    <li><a class="as2 as3" href="#">Выйти</a></li>
+                                    <li><a class="as2 as3" href="{% url 'exit' %}">Выйти</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -62,7 +59,7 @@
                 </div>
                 <div class="post">
                     <p class="header_title">5 posts</p>
-                    <p class="header_title follower">5 follower</p>
+                    <p class="header_title follower">{{count_follow}} follower</p>
                     <p class="header_title follow2">5 follow</p>
                 </div>
             </div>
