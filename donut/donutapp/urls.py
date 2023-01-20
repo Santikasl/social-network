@@ -11,6 +11,10 @@ urlpatterns = [
     path('exit/', logout_user, name='exit'),
     path('main/', Main.as_view(), name='main'),
     path('profile/', UserProfile.as_view(), name='profile'),
-
+    path('<int:pk>/', UserProfile.as_view(), name='user_profile'),
+    path('newpost/', NewPost.as_view(), name='newpost'),
+    path('like/', Like.as_view(), name='like'),
+    path('delite', delite, name='delite'),
+    path('edit/', edit, name='edit'),
     path('statistics/', lambda request: render(request, 'donutapp/statistics.html'), name='statistics'),
 ]

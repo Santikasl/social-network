@@ -55,7 +55,7 @@
         <div class="overlay">
             <div class="popup">
                 <h2>Добавление поста</h2>
-                <form id="form" action="" enctype="multipart/form-data" method="post">
+                <form id="form" action="{% url 'newpost' %}" enctype="multipart/form-data" method="post">
                     <link rel="stylesheet"
                           href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
                     {% csrf_token %}
@@ -69,7 +69,7 @@
                             </label>
                         </div>
                     </div>
-                    <textarea class="description_post" placeholder="Описание"></textarea>
+                    {{ post.description }}
                     <input type="submit" id="btn" value="Добавить">
                 </form>
             </div>

@@ -1,6 +1,7 @@
 {% extends 'donutapp/header.html' %}
 {% load static %}
 {% block head %}
+{% load customtags %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -8,7 +9,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{% static 'css/style.min.css' %}">
     <link rel="shortcut icon" href="{% static 'img/icon.png' %}" type="image/x-icon">
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>Профиль </title>
 </head>
@@ -31,7 +36,7 @@
                                         <path fill="currentColor"
                                               d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z"/>
                                     </svg>
-                                    <input type="file" name="" id="">
+                                    {{ imgForm.img }}
                                 </label>
                             </div>
                         </div>
@@ -40,7 +45,7 @@
                 <div class="profile_container">
                     <div>
                         <p class="username">
-                           {{ profile.name }}
+                            {{ profile.name }}
                         </p>
                     </div>
                 </div>
@@ -58,43 +63,29 @@
                     </nav>
                 </div>
                 <div class="post">
-                    <p class="header_title">5 posts</p>
-                    <p class="header_title follower">{{count_follow}} follower</p>
-                    <p class="header_title follow2">5 follow</p>
+                    <p class="header_title">{{number}} posts</p>
+                    <p class="header_title follower">{{followers|count}} follower</p>
+                    <p class="header_title follow2">{{follow|count}} follow</p>
                 </div>
+
             </div>
             <div class="post_container">
                 <div class="post_gallery">
+                    {% if user_post %}
+                    {% for posts in user_post %}
                     <div class="user_post content2">
                         <div class="content-overlay"></div>
-                        <img class="post_img content-image" src="{% static 'img/1.png' %}" height="230px"
+                        <img class="post_img content-image" src="{{ posts.img.url }}" height="230px"
                              width="300px">
                         <div class="content-details fadeIn-bottom">
-                            <h3>Описание</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget
-                                dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,
-                                nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium
-                                quis,
-                                sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec,
-                                vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae,
-                                justo.
-                                Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus
-                                elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula,
-                                porttitor
-                                eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra
-                                quis,
-                                feugiat a, tellus. Phasellus viverra nulla ut metus letius laoreet. Quisque rutrum.
-                                Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies
-                                nisi.
-                                Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem
-                                quam
-                                semper libero, sit amet adipiscing sem neque sed ipsum. N</p>
-                            <button class="more_btn">Подробнее</button>
+                            <h3>Описание:</h3>
+                            <p class="p-desc" id="open{{posts.id}}">{{ posts.description|linebreaksbr }}</p>
+                            <button class="more_btn" id="open{{posts.id}}">Подробнее</button>
                         </div>
-                        <div class="overlay3" id="myOverlay">
-                            <div class="popup2">
+                        <div class="overlay1" id="myOverlayopen{{posts.id}}">
+                            <div class="popup1">
                                 <div class="photo-post">
-                                    <img src="{% static 'img/1.png' %}" alt="" width="100%" height="100%"
+                                    <img src="{{ posts.img.url }}" alt="" width="100%" height="100%"
                                          style=" object-fit: cover;	">
                                 </div>
                                 <div>
@@ -118,59 +109,42 @@
                                 </div>
                                 <a href="#">
                                     <div class="header">
-                                        <div class="avatar3">
-                                            <img class="main-logo" src="{% static 'img/1.png' %}" alt=""
-                                                 width="70px">
-                                        </div>
-                                        <h1 class="title-post">SANTIKAS</h1>
+
+                                        <h1 class="title-post">Описание</h1>
                                     </div>
                                 </a>
                                 <div class="description" id="description{{posts.id}}">
-                                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
-                                        ligula
-                                        eget
-                                        dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient
-                                        montes,
-                                        nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu,
-                                        pretium quis,
-                                        sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel,
-                                        aliquet
-                                        nec,
-                                        vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis
-                                        vitae,
-                                        justo.
-                                        Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus.
-                                        Vivamus
-                                        elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula,
-                                        porttitor
-                                        eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in,
-                                        viverra
-                                        quis,
-                                        feugiat a, tellus. Phasellus viverra nulla ut metus letius laoreet. Quisque
-                                        rutrum.
-                                        Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper
-                                        ultricies nisi.
-                                        Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum
-                                        rhoncus,
-                                        sem quam
-                                        semper libero, sit amet adipiscing sem neque sed ipsum. N</p>
+                                    <p>{{ posts.description | linebreaksbr }}</p>
                                 </div>
-                                <form action="#" method="post" class="like-form form-like"
-                                      id="g">
+                                <form action="{% url 'like' %}" method="post" class="like-form form-like form2"
+                                      id="k{{posts.id}}">
                                     {% csrf_token %}
                                     <input type="hidden" name="post_id" value="{{posts.id}}">
                                     <button class="ui button positive like-btn{{posts.id}}" id="btnlike{{posts.id}}"
                                             type="submit"><p
+                                            {% if posts|color:user %}
+                                            style="color: red;"
+                                            {% endif %}
                                             class="like-img"
                                             id="like-img{{posts.id}}">
-                                        ❤ 5</p></button>
+                                        ❤ {{ posts.liked.all.count }}</p></button>
+                                </form>
+                                <textarea class="edit-desc" id="edit-desc{{posts.id}}" style="display: none">
+                {{ posts.description }}
+            </textarea>
+                                <form action="{% url 'edit' %}" method="post">
+                                    {% csrf_token %}
+                                    <button class="edit-button2">Изменить</button>
+                                    <input class="edit-button" name="id2" id="edit-button{{posts.id}}" type="button"
+                                           value="{{ posts.id }}">
+
                                 </form>
                             </div>
                         </div>
                         <div class="overlay5" id="myOverlayopens{{posts.id}}">
                             <div class="popup5">
                                 <h2 class="submit-delete">Вы действительно хотите</br>удалить этот пост?</h2>
-                                <form action="#" method="post">
+                                <form action="{% url 'delite' %}" method="post">
                                     {% csrf_token %}
                                     <input class="id-post" name="id" type="submit" value="{{ posts.id }}">
                                     <div class="yes">ДА</div>
@@ -179,47 +153,58 @@
                             </div>
                         </div>
                     </div>
-                    <div class="overlay3" id="myOverlay2">
+                    {% endfor %}
+                    {% else %}
+                    <img src="{% static 'img/no-photo.png' %}" alt="" width="400px"
+                         style="margin-left: 160%; margin-top: 15%">
+                    {% endif %}
+                    <div class="overlay3" id="myOverlay3">
                         <div class="popup3">
                             <h2 class="titel">Ваши подписчики</h2>
                             <div>
+                                {% if followers.count == 0 %}
                                 <img src="{% static 'img/no-followers.gif' %}" alt="" width="200px"
                                      style="border-radius: 30px">
                                 <h2 class="no-followers">No followers</h2>
-                                <!--                                <div class="followers-scroll">-->
-                                <!--                     -->
-                                <!--                                    <a href="#">-->
-                                <!--                                        <div class="follow-div">-->
-                                <!--                                            <div class="img">-->
-                                <!--                                                <img src="{% static 'img/1.png' %}" alt="" width="60px">-->
-                                <!--                                            </div>-->
-                                <!--                                            <p class="nic">Santikas</p>-->
-                                <!--                                        </div>-->
-                                <!--                                    </a>-->
-
-
-                                <!--                                </div>-->
+                                {% else %}
+                                <div class="followers-scroll">
+                                    {% for user in followers %}
+                                    <a href="{% url 'user_profile' user.id%}">
+                                        <div class="follow-div">
+                                            <div class="img">
+                                                <img src="{{ user.img.url }}" alt="" width="60px">
+                                            </div>
+                                            <p class="nic">{{ user.name }}</p>
+                                        </div>
+                                    </a>
+                                    {% endfor %}
+                                </div>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
-                    <div class="overlay4" id="myOverlay3">
-                        <div class="popup3">
+                    <div class="overlay4" id="myOverlay4">
+                        <div class="popup4">
                             <h2 class="titel">Подписки</h2>
                             <div>
+                                {% if follow.count == 0 %}
                                 <img src="{% static 'img/no-followers.gif' %}" alt="" width="200px"
                                      style="border-radius: 30px">
                                 <h2 class="no-followers">No follow</h2>
-                                <!--                                <div class="followers-scroll">-->
-                                <!--                     -->
-                                <!--                                    <a href="#">-->
-                                <!--                                        <div class="follow-div">-->
-                                <!--                                            <div class="img">-->
-                                <!--                                                <img src="{% static 'img/1.png' %}" alt="" width="60px">-->
-                                <!--                                            </div>-->
-                                <!--                                            <p class="nic">Santikas</p>-->
-                                <!--                                        </div>-->
-                                <!--                                    </a>-->
-                                <!--                                </div>-->
+                                {% else %}
+                                <div class="followers-scroll">
+                                    {% for user in follow %}
+                                    <a href="{% url 'user_profile' user.id%}">
+                                        <div class="follow-div">
+                                            <div class="img">
+                                                <img src="{{ user.img.url }}" alt="" width="60px">
+                                            </div>
+                                            <p class="nic">{{ user.name }}</p>
+                                        </div>
+                                    </a>
+                                    {% endfor %}
+                                </div>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
@@ -245,20 +230,25 @@
 
 <script src="http://code.jquery.com/jquery-2.0.2.min.js"></script>
 <script src="https://yastatic.net/share2/share.js"></script>
+<script src="{% static 'js/like.js' %}" defer></script>
+<script src="{% static 'js/edit.js' %}" defer></script>
 <script>
+
+
+    //Модальное окно с постом
     $(document).on('click', '.more_btn', function (e) {
-        // let id = e.target.id;  $('#myOverlay'+id).fadeIn();
-        $('#myOverlay').fadeIn();
-    });
-    $('.close-popup2').click(function () {
-        $('.overlay3').fadeOut();
+        let id = e.target.id;
+        $('#myOverlay' + id).fadeIn();
     });
     $(document).mouseup(function (e) {
-        let popup = $('.popup2');
+
+        var popup = $('.popup1');
         if (e.target != popup[0] && popup.has(e.target).length === 0) {
-            $('.overlay3').fadeOut();
+            $('.overlay1').fadeOut();
         }
     });
+
+    //Модальное окно с удалением поста
     $(document).on('click', '.delete-btn', function (e) {
         let id = e.target.id;
         $('#myOverlay' + id).fadeIn();
@@ -266,9 +256,11 @@
     $('.close-popup5').click(function () {
         $('.overlay5').fadeOut();
     });
+
+    //модальное окно с подписчиками
     $(document).on('click', '.follower', function (e) {
         let id = e.target.id;
-        $('#myOverlay2').fadeIn();
+        $('#myOverlay3').fadeIn();
     });
 
     $(document).mouseup(function (e) {
@@ -277,9 +269,11 @@
             $('.overlay3').fadeOut();
         }
     });
+
+    //Модальное окно с подписками
     $(document).on('click', '.follow2', function (e) {
         let id = e.target.id;
-        $('#myOverlay3').fadeIn();
+        $('#myOverlay4').fadeIn();
     });
 
     $(document).mouseup(function (e) {
@@ -288,6 +282,7 @@
             $('.overlay4').fadeOut();
         }
     });
+    //Модальное окно с qr кодом
     $(document).on('click', '.as4', function (e) {
         let id = e.target.id;
         $('#myOverlay6').fadeIn();
@@ -298,6 +293,24 @@
             $('.overlay6').fadeOut();
         }
     });
+    //Редактирование описания поста
+    $(document).on('click', '.edit2', function (e) {
+
+        let id = e.target.id
+        let newid = id.slice(1);
+        const btnlike = document.getElementById('btnlike' + newid)
+        const btn = document.getElementById('edit-button' + newid)
+        console.log(btn)
+        btn.style.display = 'block'
+        btnlike.style.opacity = '0'
+        const description2 = document.getElementById("description" + newid)
+        const textarea = document.getElementById("edit-desc" + newid)
+        textarea.style.display = 'none'
+        description2.style.display = 'none'
+        textarea.style.display = 'flex'
+    })
+
+    //Поделиться профилем
     Ya.share2('my-share', {
         content: {
             url: 'http://127.0.0.1:8000{{ cUser.qr_code.url }}',

@@ -1,8 +1,7 @@
-from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-
 from .models import Profile, Posts
+from django import forms
 
 
 class AuthForm(forms.Form):
@@ -20,7 +19,7 @@ class NewPosts(forms.ModelForm):
         model = Posts
         fields = ['postImg', 'description']
         widgets = {
-            'description': forms.Textarea(attrs={'placeholder': 'Описание', 'maxlength': '2000'}),
+            'description': forms.Textarea(attrs={'placeholder': 'Описание', 'maxlength': '2000','class': 'description-input'}),
         }
 
 
@@ -29,7 +28,7 @@ class ExtendedRegisterForm(UserCreationForm):
                              widget=forms.EmailInput(attrs={'placeholder': 'Электронная почта', 'class': 'js-input js-input-email'}))
     password1 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Пароль', 'class': 'js-input js-input-password1'}), max_length=60)
     password2 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Подтвердите пароль', 'class': 'js-input js-input-password2'}), max_length=60,)
-    username = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Логин', 'class': 'js-input js-input-name'}), max_length=12)
+    username = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Логин', 'class': 'js-input js-input-name','oninput':'this.value=this.value.toLowerCase()'}), max_length=12)
 
     def clean(self):
         # Определяем правило валидации
