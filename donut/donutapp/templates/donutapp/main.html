@@ -40,6 +40,7 @@
     </div>
 </div>
 <div class="wrapper">
+    <div class="blur-search" id="overlay-blur">
     <div id="fullpage">
         <div class="section s1">
             <a href="#1"></a>
@@ -530,6 +531,7 @@
         </div>
 
     </div>
+    </div>
 </div>
 <script>
     new fullpage('#fullpage', {
@@ -544,6 +546,7 @@
     });
 </script>
 <script src="http://code.jquery.com/jquery-2.0.2.min.js"></script>
+<script src="{% static 'js/search.js' %}" defer></script>
 <script>
     $(document).on('click', '.more_btn', function (e) {
         // let id = e.target.id;  $('#myOverlay'+id).fadeIn();

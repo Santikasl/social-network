@@ -17,11 +17,9 @@ class Index(ListView):
         context = super(Index, self).get_context_data(**kwargs)
         form = AuthForm()
         register_form = ExtendedRegisterForm()
-
         context = {
             'form': form,
             'register_form': register_form,
-
         }
         return context
 
@@ -83,7 +81,9 @@ class SignUp(View):
 
 def logout_user(request):
     logout(request)
-    return redirect('index')
+    port = request.META.get('SERVER_PORT')
+    host = request.META.get('REMOTE_ADDR')
+    return redirect('http://' + host + ':' + port + '/' + '#3')
 
 
 class Main(ListView):
@@ -93,7 +93,9 @@ class Main(ListView):
 
     def get(self, request):
         if not request.user.is_authenticated:
-            return redirect('index')
+            port = request.META.get('SERVER_PORT')
+            host = request.META.get('REMOTE_ADDR')
+            return redirect('http://' + host + ':' + port + '/' + '#3')
         else:
             super().get(request)
             profile = Profile.objects.get(user=request.user)
@@ -107,7 +109,6 @@ class Main(ListView):
                 'post': post,
                 'random_facts': random_facts,
             }
-
             return self.render_to_response(context)
 
 
@@ -129,7 +130,9 @@ class UserProfile(ListView):
 
     def get(self, request):
         if not request.user.is_authenticated:
-            return redirect('index')
+            port = request.META.get('SERVER_PORT')
+            host = request.META.get('REMOTE_ADDR')
+            return redirect('http://' + host + ':' + port + '/' + '#3')
         else:
             super().get(request)
             profile = Profile.objects.get(user=request.user)
@@ -140,7 +143,6 @@ class UserProfile(ListView):
             followers = Profile.objects.filter(user__in=all_followers)
             context = {
                 'followers': followers,
-                'number': user_post.count(),
                 'follow': follow,
                 'user_post': user_post,
                 'imgForm': Imgform(),
@@ -148,7 +150,6 @@ class UserProfile(ListView):
                 'post': NewPosts(),
 
             }
-
             return self.render_to_response(context)
 
 
@@ -198,3 +199,104 @@ def edit(request):
     data2 = post2.description
     res_post2 = data2
     return JsonResponse({'data': res_post2})
+
+
+class Search(View):
+
+    def post(self, request):
+        res = None
+        dataName = request.POST.get('dataName')
+        qs = Profile.objects.filter(name__icontains=dataName)[:4]
+        if len(qs) > 0 and len(dataName) > 0:
+            data = []
+            for pos in qs:
+                item = {
+                    'pk': pos.pk,
+                    'name': pos.name,
+                    'img': pos.img.url,
+                }
+                data.append(item)
+            res = data
+        else:
+            res = 'Пользователь не найден'
+        return JsonResponse({'data': res})
+
+
+class SearchProfile(ListView):
+    queryset = Profile
+    template_name = 'donutapp/search_profile.html'
+    context_object_name = 'searchProfile'
+
+    def get(self, request, pk):
+        if not request.user.is_authenticated:
+            anonim = True
+            is_follow = False
+            profile = Profile.objects.filter(pk=pk).first()
+            posts = Posts.objects.filter(user=profile)
+            # Подписчики
+            userFollowers = profile.following.all()
+            followers = Profile.objects.filter(user__in=userFollowers)
+            # Подписки
+            follow = profile.user.following.all()
+            context = {
+                'pk': pk,
+                'is_follow': is_follow,
+                'profile': profile,
+                'posts': posts,
+                'followers': followers,
+                'follow': follow,
+                'anonim': anonim
+            }
+            return render(request, 'donutapp/search_profile.html', context)
+        else:
+            # Форма с новым постом
+            new_post = NewPosts()
+            # Пользователь с поиска
+            search_user = Profile.objects.get(pk=pk)
+            # Профиль с поиска
+            profile = Profile.objects.filter(pk=pk).first()
+            # Подписчики
+            userFollowers = profile.following.all()
+            followers = Profile.objects.filter(user__in=userFollowers)
+            # Подписки
+            follow = profile.user.following.all()
+            # Наш профиль
+            user = Profile.objects.get(user=request.user)
+            if profile == user:
+                return redirect('profile')
+            # Посты
+            posts = Posts.objects.filter(user=search_user)
+            if not request.user.is_authenticated:
+                is_follow = False
+            elif user.user in profile.following.all():
+                is_follow = True
+            else:
+                is_follow = False
+            context = {
+                'pk': pk,
+                'is_follow': is_follow,
+                'profile': profile,
+                'posts': posts,
+                'followers': followers,
+                'follow': follow,
+                'post': new_post
+            }
+            return render(request, 'donutapp/search_profile.html', context)
+
+
+class Follow(View):
+    def post(self, request):
+        if not request.user.is_authenticated:
+            port = request.META.get('SERVER_PORT')
+            host = request.META.get('REMOTE_ADDR')
+            return redirect('http://'+host+':'+port+'/'+'#3')
+        else:
+            if request.method == 'POST':
+                my_profile = Profile.objects.get(user=request.user)
+                pk = request.POST.get('profile_pk')
+                obj = Profile.objects.get(pk=pk)
+                if my_profile.user in obj.following.all():
+                    obj.following.remove(my_profile.user)
+                else:
+                    obj.following.add(my_profile.user)
+                return redirect(request.META.get('HTTP_REFERER'))

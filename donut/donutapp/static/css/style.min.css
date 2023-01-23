@@ -141,7 +141,7 @@ span {
     justify-content: center;
     position: relative;
     width: 450px;
-    height: 550px;
+    height: 580px;
     font-size: 10px;
     background-color: white;
     border-radius: 30px;
@@ -209,6 +209,14 @@ header .title {
 
 }
 
+.post2 {
+    display: flex;
+    z-index: 3;
+    margin-top: 100px;
+    margin-left: -267px;
+
+}
+
 .search {
     background-image: url(icon.png);
     background-repeat: no-repeat;
@@ -254,13 +262,14 @@ header .title {
 .not-found-gif {
     position: absolute;
     z-index: 0;
+
     width: 500px;
     margin-left: 13%;
     margin-top: -20px;
 }
 
 .not-found-extend {
-    width: 898px;
+    width: 930px;
     height: 400px;
 }
 
@@ -271,7 +280,7 @@ header .title {
 
 .searchItems {
     background-color: white;
-    width: 900px;
+    width: 930px;
     overflow: scroll;
     position: relative;
     margin-left: -15px;
@@ -1193,18 +1202,31 @@ h2 {
     align-items: center;
 }
 
-/*.blur-search {*/
-/*    filter: blur(0.5rem);*/
-/*    transition: 0.5s;*/
-/*    position: fixed;*/
-/*    left: 0;*/
-/*    right: 0;*/
-/*    top: 0;*/
-/*    bottom: 0;*/
+.blur-search {
+    filter: blur(0.5rem);
+    transition: 0.5s;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
 
-/*}*/
+}
 
 .logo {
+    z-index: 3;
+    width: 150px;
+    overflow: hidden;
+    border-radius: 80px;
+    height: 150px;
+    background-color: #ffffff;
+    align-items: center;
+    margin-left: -550px;
+    justify-items: center;
+
+}
+
+.logo2 {
     z-index: 3;
     width: 150px;
     overflow: hidden;
@@ -1290,6 +1312,15 @@ h2 {
     font-size: 50px;
     color: white;
     margin-top: -30px;
+    font-family: Organetto-Variable;
+}
+
+.username2 {
+
+    font-size: 50px;
+    color: white;
+    margin-top: -30px;
+    margin-left: -80px;
     font-family: Organetto-Variable;
 }
 
@@ -1461,6 +1492,7 @@ ul {
 }
 
 .profile_container {
+    display: flex;
     margin-left: 200px;
     width: 150px;
 
@@ -2284,3 +2316,27 @@ input:focus:-ms-input-placeholder {
     transform: rotate(45deg);
     left: -4px;
 }
+
+.follow-btn {
+
+    margin-left: 20px;
+    margin-top: -43px;
+
+}
+
+.follow-btn2 {
+    display: none;
+}
+
+.follow {
+    background-color: #0c0c0c;
+    width: 130px;
+    height: 40px;
+    margin-top: 6px;
+    font-size: 20px;
+    border-radius: 20px;
+    outline: 1px solid white;
+    color: white;
+    font-family: Organetto-Variable;
+}
+

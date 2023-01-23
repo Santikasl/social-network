@@ -45,9 +45,17 @@
             </div>
         </div>
         <div class="new-post-and-area">
+{% if anonim %}
+             <a href="{% url 'index' %}#3">
             <div class="button">
                 <img src="{% static 'img/notification.png' %}" alt="" width="55px">
             </div>
+            </a>
+            {% else %}
+            <div class="button">
+                <img src="{% static 'img/notification.png' %}" alt="" width="55px">
+            </div>
+             {% endif %}
             <a href="{% url 'profile' %}">
                 <img src="{% static 'img/user-photo.png' %}" alt="" class="user-photo" width="43px">
             </a>
@@ -143,6 +151,7 @@
 </script>
 
 <script src="http://code.jquery.com/jquery-2.0.2.min.js"></script>
+
 <script>
     $(document).ready(function () {
         //Скрыть PopUp при загрузке страницы

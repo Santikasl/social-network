@@ -15,7 +15,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
           rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <title>Профиль </title>
+    <title>{{profile.name|title}}</title>
 </head>
 {% endblock %}
 {% block name %}
@@ -24,47 +24,40 @@
         <div class="blur-search" id="overlay-blur">
 
             <div class="profile_info">
-                <div class="logo">
+                <div class="logo2">
                     <img src="{{ profile.img.url }}" alt="" width="150px">
                 </div>
-                <div class="file-upload ">
-                    <form action="" enctype="multipart/form-data" method="post">
-                        {% csrf_token %}
-                        <div class="example-1">
-                            <div class="form-group">
-                                <label class="label">
-                                    <svg class="svg" style="width:100px;height:100px" viewBox="0 0 24 24">
-                                        <path fill="currentColor"
-                                              d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z"/>
-                                    </svg>
-                                    {{ imgForm.img }}
-                                </label>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+
                 <div class="profile_container">
                     <div>
-                        <p class="username">
+                        <p class="username2">
                             {{ profile.name }}
                         </p>
+
                     </div>
+                     <div class="follow-btn">
+                    {% if is_follow %}
+                    <form action="{% url 'follow' %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="profile_pk" value={{profile.pk}}>
+                        <button type="submit" class="follow">
+                            Отписаться
+                        </button>
+                    </form>
+                    {% else %}
+                    <form action="{% url 'follow' %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="profile_pk" value={{profile.pk}}>
+                        <button type="submit" class="follow">
+                            Подписаться
+                        </button>
+                    </form>
+                    {% endif %}
                 </div>
-                <div>
-                    <nav class="three">
-                        <ul class="topmenu">
-                            <li><a class="as as_li" href="#">. . .<i class=""></i></a>
-                                <ul class="submenu">
-                                    <li><a class="as2 as4" href="#">QR CODE</a></li>
-                                    <li><a class="as2" href="#">Статистика</a></li>
-                                    <li><a class="as2 as3" href="{% url 'exit' %}">Выйти</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </nav>
                 </div>
-                <div class="post">
-                    <p class="header_title">{{user_post|count}} posts</p>
+
+                <div class="post2">
+                    <p class="header_title">{{posts|count}} posts</p>
                     <p class="header_title follower">{{followers|count}} follower</p>
                     <p class="header_title follow2">{{follow|count}} follow</p>
                 </div>
@@ -72,8 +65,8 @@
             </div>
             <div class="post_container">
                 <div class="post_gallery">
-                    {% if user_post %}
-                    {% for posts in user_post %}
+                    {% if posts %}
+                    {% for posts in posts %}
                     <div class="user_post content2">
                         <div class="content-overlay"></div>
                         <img class="post_img content-image" src="{{ posts.img.url }}" height="230px"
@@ -89,25 +82,7 @@
                                     <img src="{{ posts.img.url }}" alt="" width="100%" height="100%"
                                          style=" object-fit: cover;	">
                                 </div>
-                                <div>
-                                    <nav class="three2">
-                                        <ul class="topmenu">
-                                            <li><a class="as " href="#">. . .<i class=""></i></a>
-                                                <ul class="submenu2">
-                                                    <form action="" method="post">
-                                                        {% csrf_token %}
-                                                        <input class="id-post2 edit2" id="s{{posts.id}}" name="id"
-                                                               type="button"
-                                                               value="{{ posts.id }}">
-                                                        <li><a class="as2" href="">Редактировать</a></li>
-                                                    </form>
-                                                    <li><a class="as2 as3 delete-btn" id="opens{{posts.id}}"
-                                                           href="#">Удалить</a></li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </nav>
-                                </div>
+
                                 <a href="#">
                                     <div class="header">
 
@@ -117,6 +92,13 @@
                                 <div class="description" id="description{{posts.id}}">
                                     <p>{{ posts.description | linebreaksbr }}</p>
                                 </div>
+                                {% if anonim %}
+                                <a href="{% url 'index' %}#3">
+                                    <button class="ui button positive"
+                                            type="submit"><p class="like-img">
+                                        ❤ {{ posts.liked.all.count }}</p></button>
+                                </a>
+                                {%else%}
                                 <form action="{% url 'like' %}" method="post" class="like-form form-like form2"
                                       id="k{{posts.id}}">
                                     {% csrf_token %}
@@ -130,29 +112,10 @@
                                             id="like-img{{posts.id}}">
                                         ❤ {{ posts.liked.all.count }}</p></button>
                                 </form>
-                                <textarea class="edit-desc" id="edit-desc{{posts.id}}" style="display: none">
-                {{ posts.description }}
-            </textarea>
-                                <form action="{% url 'edit' %}" method="post">
-                                    {% csrf_token %}
-                                    <button class="edit-button2">Изменить</button>
-                                    <input class="edit-button" name="id2" id="edit-button{{posts.id}}" type="button"
-                                           value="{{ posts.id }}">
+                                {% endif %}
+                            </div>
+                        </div>
 
-                                </form>
-                            </div>
-                        </div>
-                        <div class="overlay5" id="myOverlayopens{{posts.id}}">
-                            <div class="popup5">
-                                <h2 class="submit-delete">Вы действительно хотите</br>удалить этот пост?</h2>
-                                <form action="{% url 'delite' %}" method="post">
-                                    {% csrf_token %}
-                                    <input class="id-post" name="id" type="submit" value="{{ posts.id }}">
-                                    <div class="yes">ДА</div>
-                                </form>
-                                <div class="close-popup5">НЕТ</div>
-                            </div>
-                        </div>
                     </div>
                     {% endfor %}
                     {% else %}
@@ -161,7 +124,7 @@
                     {% endif %}
                     <div class="overlay3" id="myOverlay3">
                         <div class="popup3">
-                            <h2 class="titel">Ваши подписчики</h2>
+                            <h2 class="titel">Подписчики {{profile.name}}</h2>
                             <div>
                                 {% if followers.count == 0 %}
                                 <img src="{% static 'img/no-followers.gif' %}" alt="" width="200px"
@@ -186,7 +149,7 @@
                     </div>
                     <div class="overlay4" id="myOverlay4">
                         <div class="popup4">
-                            <h2 class="titel">Подписки</h2>
+                            <h2 class="titel">Подписки {{profile.name}}</h2>
                             <div>
                                 {% if follow.count == 0 %}
                                 <img src="{% static 'img/no-followers.gif' %}" alt="" width="200px"

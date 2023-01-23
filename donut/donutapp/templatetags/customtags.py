@@ -12,4 +12,3 @@ def color(post, user):
 def color(follow):
     return follow.count()
 
-
