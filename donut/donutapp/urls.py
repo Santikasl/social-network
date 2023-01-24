@@ -18,5 +18,5 @@ urlpatterns = [
     path('like/', Like.as_view(), name='like'),
     path('delite', delite, name='delite'),
     path('edit/', edit, name='edit'),
-    path('statistics/', lambda request: render(request, 'donutapp/statistics.html'), name='statistics'),
+    path('statistics/', Statistics.as_view(), name='statistics'),
 ]

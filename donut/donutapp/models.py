@@ -12,18 +12,11 @@ def default_datetime():
     return datetime.now()
 
 
-MALE_CHOICES = (
-    ('female', 'FEMALE'),
-    ('male', 'MALE'),
-)
-
-LIKE_CHOICES = {
-    ('Like', 'Like'),
-    ('Unlike', 'Unlike'),
-}
-
-
 class Profile(models.Model):
+    MALE_CHOICES = (
+        ('female', 'FEMALE'),
+        ('male', 'MALE'),
+    )
     name = models.CharField(max_length=100, default='none')
     following = models.ManyToManyField(User, related_name='following', blank=True)
     img = models.ImageField(upload_to='images/', default='images/default.png')

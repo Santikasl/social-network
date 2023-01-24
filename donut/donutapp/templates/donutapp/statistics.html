@@ -1,6 +1,7 @@
 {% extends 'donutapp/header.html' %}
 {% load static %}
 {% block head %}
+{% load customtags %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -8,6 +9,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{% static 'css/style.min.css' %}">
     <link rel="shortcut icon" href="{% static 'img/icon.png' %}" type="image/x-icon">
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>Статистика</title>
 </head>
 {% endblock %}
@@ -15,7 +22,7 @@
 <div class="wrapper">
     <section class="content">
         <div class="blur-search" id="overlay-blur">
-            <div class="post_container">
+            <div class="statistics_container">
                 <div class="statistics">
                     <div class="statistics_card content2">
                         <h1 class="title_male">Пол подписчиков</h1>
@@ -23,96 +30,37 @@
                             <canvas id="myChart" width="100px"></canvas>
                         </div>
                     </div>
-                    <div >
+                    <div>
                         <h1 class="title_post">Лучшее фото</h1>
-                        <div class="best_post content2">
 
-                            <div class="content-overlay"></div>
-                            <img class="best_post_img content-image" src="{% static 'img/1.png' %}">
+                        <div class="best_post content2">
+                            <div class="content-overlay2"></div>
+                            <img class="best_post_img content-image" src="{{ bestPost.img }}">
                             <div class="user_logo">
-                                <img class="user_logo_img" src="{% static 'img/1.png' %}">
+                                <img class="user_logo_img" src="{{ bestPost.imgUrl }}">
                             </div>
-                            <div class="desc">Santikas</div>
-                            <div class="content-details fadeIn-bottom">
-                                <h3>Santikas</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget
-                                    dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,
-                                    nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium
-                                    quis,
-                                    sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec,
-                                    vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae,
-                                    justo.
-                                    Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus
-                                    elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula,
-                                    porttitor
-                                    eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra
-                                    quis,
-                                    feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum.
-                                    Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies
-                                    nisi.
-                                    Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem
-                                    quam
-                                    semper libero, sit amet adipiscing sem neque sed ipsum. N</p>
-                                <button class="more_btn">Подробнее</button>
+                            <div class="desc">{{ bestPost.name }}</div>
+                             <form action="{% url 'like' %}" method="post" class="like-form form-like2 form2"
+                                      id="k{{bestPost.pk}}">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="post_id" value="{{bestPost.pk}}">
+                                    <button class="ui button positive like-btn{{bestPost.pk}}" id="btnlike{{bestPost.pk}}"
+                                            type="submit"><p
+                                            {% if bestPost.post|color:user %}
+                                            style="color: red;"
+                                            {% endif %}
+                                            class="like-img"
+                                            id="like-img{{bestPost.pk}}">
+                                        ❤ {{ bestPost.like }}</p></button>
+                                </form>
+                            <div class="content-details2 fadeIn-bottom">
+                                <h3>Описание</h3>
+                                <p>{{ bestPost.descriptions|linebreaksbr }}</p>
+
                             </div>
-                            <div class="overlay3" id="myOverlay">
-                                <div class="popup2">
-                                    <div class="photo-post">
-                                        <img src="{% static 'img/1.png' %}" alt="" width="100%" height="100%"
-                                             style=" object-fit: cover;	">
-                                    </div>
-                                    <a href="#">
-                                        <div class="header">
-                                            <div class="avatar3">
-                                                <img class="main-logo" src="{% static 'img/1.png' %}" alt=""
-                                                     width="70px">
-                                            </div>
-                                            <h1 class="title-post">SANTIKAS</h1>
-                                        </div>
-                                    </a>
-                                    <div class="description" id="description{{posts.id}}">
-                                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
-                                            ligula
-                                            eget
-                                            dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient
-                                            montes,
-                                            nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu,
-                                            pretium quis,
-                                            sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel,
-                                            aliquet
-                                            nec,
-                                            vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis
-                                            vitae,
-                                            justo.
-                                            Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus.
-                                            Vivamus
-                                            elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula,
-                                            porttitor
-                                            eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in,
-                                            viverra
-                                            quis,
-                                            feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque
-                                            rutrum.
-                                            Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper
-                                            ultricies nisi.
-                                            Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum
-                                            rhoncus,
-                                            sem quam
-                                            semper libero, sit amet adipiscing sem neque sed ipsum. N</p>
-                                    </div>
-                                    <form action="#" method="post" class="like-form form-like"
-                                          id="g">
-                                        {% csrf_token %}
-                                        <input type="hidden" name="post_id" value="{{posts.id}}">
-                                        <button class="ui button positive like-btn{{posts.id}}" id="btnlike{{posts.id}}"
-                                                type="submit"><p
-                                                class="like-img"
-                                                id="like-img{{posts.id}}">
-                                            ❤ 5</p></button>
-                                    </form>
-                                </div>
-                            </div>
+
                         </div>
+
                     </div>
                     <div class="statistics_card content2">
                         <h1 class="title_male">Кол-во лайков</h1>
@@ -128,6 +76,7 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{% static 'js/like.js' %}" defer></script>
 <script>
     $(document).on('click', '.more_btn', function (e) {
         // let id = e.target.id;  $('#myOverlay'+id).fadeIn();
@@ -150,7 +99,7 @@
             data: {
                 labels: ['Мужчины', 'Женщины'],
                 datasets: [{
-                    data: ["10", "20"],
+                    data: ["{{count_male}}", "{{count_female}}"],
                     backgroundColor: [
                         'rgba(54, 162, 235,1)',
                         'rgb(255,99,132)',
@@ -172,9 +121,9 @@
         {
             type: 'doughnut',
             data: {
-                labels: ["пост1", "пост2"],
+                labels: [{% for item in all_post %}'{{item.post}}',{% endfor %}],
                 datasets: [{
-                    data: [6, 7],
+                    data:[{% for item in all_post %}'{{item.like}}',{% endfor %}],
                     backgroundColor: [
                         'rgba(54, 162, 235,1)',
                         'rgb(255,99,132)',

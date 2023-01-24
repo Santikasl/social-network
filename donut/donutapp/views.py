@@ -228,60 +228,39 @@ class SearchProfile(ListView):
     context_object_name = 'searchProfile'
 
     def get(self, request, pk):
+        anonim = False
         if not request.user.is_authenticated:
             anonim = True
             is_follow = False
-            profile = Profile.objects.filter(pk=pk).first()
-            posts = Posts.objects.filter(user=profile)
-            # Подписчики
-            userFollowers = profile.following.all()
-            followers = Profile.objects.filter(user__in=userFollowers)
-            # Подписки
-            follow = profile.user.following.all()
-            context = {
-                'pk': pk,
-                'is_follow': is_follow,
-                'profile': profile,
-                'posts': posts,
-                'followers': followers,
-                'follow': follow,
-                'anonim': anonim
-            }
-            return render(request, 'donutapp/search_profile.html', context)
-        else:
-            # Форма с новым постом
-            new_post = NewPosts()
-            # Пользователь с поиска
-            search_user = Profile.objects.get(pk=pk)
-            # Профиль с поиска
-            profile = Profile.objects.filter(pk=pk).first()
-            # Подписчики
-            userFollowers = profile.following.all()
-            followers = Profile.objects.filter(user__in=userFollowers)
-            # Подписки
-            follow = profile.user.following.all()
-            # Наш профиль
+        new_post = NewPosts()
+        search_user = Profile.objects.get(pk=pk)
+        profile = Profile.objects.filter(pk=pk).first()
+        userFollowers = profile.following.all()
+        followers = Profile.objects.filter(user__in=userFollowers)
+        follow = profile.user.following.all()
+        posts = Posts.objects.filter(user=search_user)
+        try:
             user = Profile.objects.get(user=request.user)
             if profile == user:
                 return redirect('profile')
-            # Посты
-            posts = Posts.objects.filter(user=search_user)
-            if not request.user.is_authenticated:
-                is_follow = False
-            elif user.user in profile.following.all():
+            if user.user in profile.following.all():
                 is_follow = True
             else:
                 is_follow = False
-            context = {
-                'pk': pk,
-                'is_follow': is_follow,
-                'profile': profile,
-                'posts': posts,
-                'followers': followers,
-                'follow': follow,
-                'post': new_post
-            }
-            return render(request, 'donutapp/search_profile.html', context)
+        except Exception:
+            user = None
+            is_follow = False
+        context = {
+            'pk': pk,
+            'is_follow': is_follow,
+            'profile': profile,
+            'posts': posts,
+            'followers': followers,
+            'follow': follow,
+            'post': new_post,
+            'anonim': anonim,
+        }
+        return render(request, 'donutapp/search_profile.html', context)
 
 
 class Follow(View):
@@ -289,7 +268,7 @@ class Follow(View):
         if not request.user.is_authenticated:
             port = request.META.get('SERVER_PORT')
             host = request.META.get('REMOTE_ADDR')
-            return redirect('http://'+host+':'+port+'/'+'#3')
+            return redirect('http://' + host + ':' + port + '/' + '#3')
         else:
             if request.method == 'POST':
                 my_profile = Profile.objects.get(user=request.user)
@@ -300,3 +279,57 @@ class Follow(View):
                 else:
                     obj.following.add(my_profile.user)
                 return redirect(request.META.get('HTTP_REFERER'))
+
+
+class Statistics(ListView):
+    queryset = Profile
+    template_name = 'donutapp/statistics.html'
+
+    def get(self, request):
+        if not request.user.is_authenticated:
+            port = request.META.get('SERVER_PORT')
+            host = request.META.get('REMOTE_ADDR')
+            return redirect('http://' + host + ':' + port + '/' + '#3')
+        else:
+            profile = Profile.objects.get(user=request.user)
+            user_posts = Posts.objects.filter(user=profile)
+            n = 0
+            items = []
+            all_post = []
+            for post in user_posts:
+                posts = {
+                    'post': post,
+                    'like': post.liked.all().count(),
+                }
+                all_post.append(posts)
+                if post.liked.all().count() >= n:
+                    items = {
+                        'post': post,
+                        'pk': post.pk,
+                        'descriptions': post.description,
+                        'img': post.img.url,
+                        'like': post.liked.all().count(),
+                        'user': post.user.id,
+                        'imgUrl': post.user.img.url,
+                        'name': post.user.name,
+                    }
+                    n = post.liked.all().count()
+            followersUser = profile.following.all()
+            followers = Profile.objects.filter(user__in=followersUser)
+            count_male = 0
+            count_female = 0
+            for male in followers:
+                if male.male == 'male':
+                    count_male += 1
+                else:
+                    count_female += 1
+            post = NewPosts()
+            context = {
+                'bestPost': items,
+                'post': post,
+                'count_male': count_male,
+                'count_female': count_female,
+                'all_post': all_post,
+            }
+
+            return render(request, 'donutapp/statistics.html', context)
