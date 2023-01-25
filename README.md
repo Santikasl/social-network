@@ -1,6 +1,6 @@
 # Donut
 
-![](https://i.ibb.co/Sd72gk3/donut.png)
+![](https://i.postimg.cc/43D1x1zS/donut.png)
 
 Description
 =============
