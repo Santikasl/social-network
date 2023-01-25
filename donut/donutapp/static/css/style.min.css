@@ -152,6 +152,11 @@ span {
     margin-left: -250px;
 }
 
+.s2 {
+    position: absolute;
+    z-index: 9999 !important;
+}
+
 /* HEADER */
 .search ::-ms-clear {
     display: none;
@@ -175,9 +180,10 @@ header .title {
     position: fixed;
     background-color: #0c0c0c;
     align-items: center;
+    z-index: 999!important;
     justify-content: space-between;
     width: 100%;
-    z-index: 5;
+
 }
 
 .name {
@@ -464,6 +470,8 @@ input:focus:-ms-input-placeholder {
 #myOverlay {
     z-index: 37;
     position: fixed;
+    z-index: 999;
+    overflow: hidden;
     background-color: rgba(0, 0, 0, .7);
     width: 100%;
     height: 100%;
@@ -863,7 +871,7 @@ h2 {
     width: 100%;
     grid-template-columns: 350px 350px 350px 350px;
     gap: 1em;
-    margin-top: -6%;
+
     border-radius: 30px;
     height: 100%;
 
@@ -892,6 +900,10 @@ h2 {
     width: 0;
 }
 
+.fullpage {
+    z-index: -1;
+}
+
 .section2 {
     overflow-y: scroll !important;
     display: flex;
@@ -899,6 +911,7 @@ h2 {
     align-items: center;
     width: 100%;
     height: 100%;
+
     padding-left: 1%;
 
 }
@@ -941,7 +954,7 @@ h2 {
 
 .content2 {
     position: relative;
-    margin-top: -100px;
+    margin-bottom: 50px;
     width: 90%;
     max-width: 400px;
     font-size: 14px !important;
@@ -988,8 +1001,10 @@ h2 {
     opacity: 1;
 }
 
+
 .content-image {
     width: 100%;
+    height: 100%;
 }
 
 .content-details {
@@ -1574,7 +1589,7 @@ ul {
 .post_container {
     position: absolute;
     display: flex;
-    margin-top: 385px;
+    margin-top: 285px;
     justify-content: center;
     align-items: center;
     width: 100%;
@@ -2346,6 +2361,33 @@ input:focus:-ms-input-placeholder {
     background-color: rgba(0, 0, 0, 0.8);
 }
 
+.overlay10 {
+    position: fixed;
+    margin-top: 44%;
+    width: 100%;
+    height: 120vh;
+    z-index: 999 !important;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.8);
+
+}
+
+.no-followers-title {
+    margin-top: 5%;
+    font-family: Century Gothic;
+    display: block;
+    color: white;
+    font-size: 25px;
+    width: 800px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+
 .popup1 {
     position: absolute;
     width: 1000px;
@@ -2353,7 +2395,7 @@ input:focus:-ms-input-placeholder {
     left: 50%;
     overflow: hidden;
     top: 53%;
-    z-index: 9999 !important;
+
     transform: translate(-50%, -50%);
     border-radius: 30px;
     box-sizing: border-box;

@@ -4,6 +4,7 @@ from django.views.generic import ListView, View
 from django.shortcuts import redirect, render
 from django.http import JsonResponse
 from django.contrib import messages
+from itertools import chain
 from .models import *
 from .forms import *
 import random
@@ -102,12 +103,23 @@ class Main(ListView):
             facts = Facts.objects.all()
             random_pk = random.randint(1, 46)
             random_facts = facts[random_pk]
+            #
+            follows = profile.user.following.all()
+            users = [user for user in follows]
+            post_follow = []
+            for u in users:
+                posts = Posts.objects.filter(user=u).first()
+
+                if posts is not None:
+                    post_follow.append(posts)
+
             context = self.get_context_data()
             post = NewPosts()
             context = {
                 'profile': profile,
                 'post': post,
                 'random_facts': random_facts,
+                'post_follow':post_follow,
             }
             return self.render_to_response(context)
 
