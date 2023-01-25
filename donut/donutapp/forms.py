@@ -48,3 +48,5 @@ class Imgform(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['img']
+
+

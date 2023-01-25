@@ -4,6 +4,7 @@ from django.urls import path, reverse
 from .views import *
 from django.shortcuts import render
 
+
 urlpatterns = [
     path('', Index.as_view(), name='index'),
     path('signin/', SignIn.as_view(), name='signin'),
@@ -19,4 +20,5 @@ urlpatterns = [
     path('delite', delite, name='delite'),
     path('edit/', edit, name='edit'),
     path('statistics/', Statistics.as_view(), name='statistics'),
+
 ]

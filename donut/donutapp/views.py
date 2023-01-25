@@ -1,4 +1,6 @@
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
+from django.contrib.auth.forms import PasswordResetForm
 from django.contrib.auth.hashers import check_password
 from django.views.generic import ListView, View
 from django.shortcuts import redirect, render
@@ -10,7 +12,7 @@ from .forms import *
 import random
 
 
-class Index(ListView):
+class Index(ListView, PasswordResetView):
     queryset = Profile
     template_name = 'donutapp/index.html'
 
@@ -18,10 +20,14 @@ class Index(ListView):
         context = super(Index, self).get_context_data(**kwargs)
         form = AuthForm()
         register_form = ExtendedRegisterForm()
+        password = PasswordResetForm()
+
         context = {
             'form': form,
+            'password': password,
             'register_form': register_form,
         }
+
         return context
 
     def get(self, request):
@@ -48,6 +54,22 @@ class SignIn(View):
                 return redirect('main')
 
 
+class MyPasswordResetDoneView(PasswordResetDoneView):
+    def get(self, request):
+        messages.error(request, "Ссылка отправлена, проверьте прочту")
+        return redirect('index')
+
+
+class MyPasswordResetConfirmView(PasswordResetConfirmView):
+    template_name = 'donutapp/reset_password.html'
+
+
+class MyPasswordResetCompleteView(PasswordResetCompleteView):
+    def get(self, request):
+        messages.error(request, "Пароль успешно изменён, войдите в аккаунт")
+        return redirect('index')
+
+
 class SignUp(View):
     def post(self, request):
         register_form = ExtendedRegisterForm(request.POST)
@@ -57,10 +79,10 @@ class SignUp(View):
             username = register_form.cleaned_data.get('username').lower()
             email = register_form.cleaned_data.get('email')
             if User.objects.filter(username=username).first():
-                messages.error(request, "Пользователь с таким ником уже существует. Войдите в аккаунт")
+                messages.error(request, "Пользователь с таким ником уже существует")
                 return redirect(request.META.get('HTTP_REFERER') + '#3')
             elif User.objects.filter(email=email).first():
-                messages.error(request, "Пользователь с таким e-mail уже существует. Войдите в аккаунт")
+                messages.error(request, "Пользователь с таким e-mail уже существует")
                 return redirect(request.META.get('HTTP_REFERER') + '#3')
             elif password == password2:
                 profile = Profile()
@@ -119,7 +141,7 @@ class Main(ListView):
                 'profile': profile,
                 'post': post,
                 'random_facts': random_facts,
-                'post_follow':post_follow,
+                'post_follow': post_follow,
             }
             return self.render_to_response(context)
 
@@ -345,3 +367,5 @@ class Statistics(ListView):
             }
 
             return render(request, 'donutapp/statistics.html', context)
+
+

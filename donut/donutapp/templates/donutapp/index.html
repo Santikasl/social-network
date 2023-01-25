@@ -63,10 +63,14 @@
                                 <h1 class="auth_titel">Авторизация</h1>
                                 <div> {{ form.name}}</div>
 
+
                                 <div> {{ form.password}}</div>
-                                 {% for message in messages %}
+
+                                {% for message in messages %}
                                 <span class="error_msg2">{{ message }}</span>
+                                <a href="#" class="error_msg2" id="reset_passwords">Забыли пароль?</a>
                                 {% endfor %}
+
                                 <div><a href="#" class="signup" id="signup">Ещё нет аккаунта...</a></div>
                                 <button class="btnS" type="submit">START</button>
                             </form>
@@ -78,7 +82,8 @@
                                 <span class="msg" id="msg_name">Ник должен быть больше 7 символов</span>
                                 {{ register_form.email}}
                                 {{ register_form.password1 }}
-                                <span class="msg" id="msg_password">В пароле должны быть цифры</br> и латинские символы</span>
+                                <span class="msg" id="msg_password">В пароле должны быть цифры</br>
+                                    и латинские символы</span>
                                 {{ register_form.password2 }}
                                 <span class="msg" id="msg">Проверьте правильность пароля</span>
 
@@ -89,6 +94,16 @@
                                 </select>
 
                                 <div><a href="#" class="signup" id="signin">Уже есть аккаунт...</a></div>
+                                <button class="btnS" type="submit">START</button>
+                            </form>
+
+                            <form id="reset_form" class="reset_form" method="post">
+                                {% csrf_token %}
+                                <h1 class="auth_titel">Введите свой e-mail</h1>
+                                 <div> {{ password.email }}</div>
+
+
+                                <div><a href="#" class="signup" id="signup">Ещё нет аккаунта...</a></div>
                                 <button class="btnS" type="submit">START</button>
                             </form>
                         </div>
@@ -104,22 +119,33 @@
     </div>
 </div>
 
-<script src="{% static 'js/validators.js' %}"></script>
+<script src="{% static 'js/regiserValidator.js' %}"></script>
 <script>
 
     let btn = document.getElementById("signup")
     let btn2 = document.getElementById("signin")
+    let btn3 = document.getElementById("reset_passwords")
+    console.log(btn3)
     let auth = document.getElementById("text2")
     let registr = document.getElementById("text")
+    let resetPasswords = document.getElementById("reset_form")
     registr.style.display = "none";
+    resetPasswords.style.display = "none";
     btn.onclick = function () {
         auth.style.display = "none";
         registr.style.display = "block";
     };
+
     btn2.onclick = function () {
         registr.style.display = "none";
         auth.style.display = "block";
     };
+       if (btn3) {
+           btn3.onclick = function () {
+               auth.style.display = "none";
+               resetPasswords.style.display = "block";
+           };
+       }
     new fullpage('#fullpage', {
         // здесь параметры
         autoScrolling: true,

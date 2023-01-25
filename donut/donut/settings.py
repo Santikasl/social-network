@@ -13,8 +13,6 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from pathlib import Path
 import os
 
-
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -26,6 +24,7 @@ SECRET_KEY = 'django-insecure-!xrrb&49qv4)6y)3uxf#)#_&_@8s73b58crc#rv+k-dq55_qm(
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+
 
 ALLOWED_HOSTS = ['*']
 
@@ -123,4 +122,12 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
-LOGIN_REDIRECT_URL = '/main/'
+
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_FILE_PATH = BASE_DIR / "sent_emails"
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'ggwerfgweg@yandex.ru'
+DEFAULT_FROM_EMAIL = 'ggwerfgweg@yandex.ru'
+EMAIL_HOST_PASSWORD = "fsavpsphedzmwjan"
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
