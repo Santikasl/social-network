@@ -22,7 +22,7 @@ How to run
 		`$ cd social-network`
 3. Build a new image:  
 		`$ docker build -t donut .`
-4. Run image: 
+4. Run image:  
 		`$ docker run -p 8000:8000 donut`
 6. Open site:  
 		http://localhost:8000/
