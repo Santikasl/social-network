@@ -20,7 +20,9 @@ How to run
 		`$ git clone https://github.com/Santikasl/social-network.git`
 2. Navigate into the project directory:  
 		`$ cd social-network`
-3. Run container:  
-		`$ docker-compose up`
-4. Open site:  
+3. Build a new image:  
+		`$ docker build -t donut .`
+4. Run image: 
+		`$ docker run -p 8000:8000 donut`
+6. Open site:  
 		http://localhost:8000/
